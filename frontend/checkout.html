@@ -1,75 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <title>Checkout</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout - BookHub</title>
   <link rel="stylesheet" href="styles.css"/>
-  <script src="https://checkout.flutterwave.com/v3.js"></script>
 </head>
 <body>
-  <div id="checkout" style="padding:1rem"></div>
+  <nav>
+    <h1>📚 BookHub</h1>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="about.html">About</a>
+  </nav>
 
+  <main>
+    <h2>Checkout</h2>
+    <div id="order-summary"></div>
+    <button id="pay-now">Pay Now</button>
+  </main>
+
+  <footer>
+    <p>© 2025 BookHub</p>
+  </footer>
+
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
   <script>
-    function getQueryParam(name) {
-      const params = new URLSearchParams(location.search);
-      return params.get(name);
-    }
+    // Get book details from query string
+    const params = new URLSearchParams(window.location.search);
+    const title = params.get("title");
+    const price = parseFloat(params.get("price"));
+    const downloadUrl = params.get("downloadUrl");
 
-    const id = parseInt(getQueryParam('id'));
+    // Show order summary
+    document.getElementById("order-summary").innerHTML = `
+      <p><strong>Book:</strong> ${title}</p>
+      <p><strong>Price:</strong> ₦${price}</p>
+    `;
 
-    fetch('books.json')
-      .then(r => r.json())
-      .then(items => {
-        const p = items.find(x => x.id === id);
-        const el = document.getElementById('checkout');
-
-        if (!p) {
-          el.innerHTML = '<p>Product not found.</p>';
-          return;
-        }
-
-        el.innerHTML = `
-          <h2>Checkout</h2>
-          <p>${p.title} — ₦${p.price}</p>
-          <p>After payment you'll be able to download the file.</p>
-          <button id="payButton" style="padding:.5rem 1rem;background:#0b5ed7;color:white;border:none;border-radius:6px">
-            Proceed to Pay
-          </button>
-        `;
-
-        document.getElementById('payButton').addEventListener('click', () => {
-          FlutterwaveCheckout({
-            public_key: "FLWPUBK_TEST-45fb3374f78bda92f175771f7a9bf51b-X",
-            tx_ref: "bookhub-" + Date.now(),
-            amount: p.price,
-            currency: "NGN",
-            payment_options: "card, banktransfer, ussd",
-            customer: {
-              email: "customer@example.com",
-              phone_number: "08000000000",
-              name: "John Doe"
-            },
-            customizations: {
-              title: "BookHub",
-              description: `Purchase of ${p.title}`,
-              logo: "https://via.placeholder.com/150"
-            },
-            callback: function(data) {
-              console.log("Payment Response:", data);
-
-              if (data.status === "successful") {
-                // Redirect to your book download link
-                window.location.href = p.download_url; 
-              } else {
-                alert("Payment not completed. Please try again.");
-              }
-            },
-            onclose: function() {
-              alert("Payment window closed.");
-            }
-          });
-        });
+    // Payment handler
+    document.getElementById("pay-now").addEventListener("click", function () {
+      FlutterwaveCheckout({
+        public_key: "FLWPUBK_TEST-45fb3374f78bda92f175771f7a9bf51b-X",
+        tx_ref: "bookhub_" + Date.now(),
+        amount: price,
+        currency: "NGN",
+        payment_options: "card, banktransfer, ussd",
+        customer: {
+          email: "customer@example.com",
+          phone_number: "08012345678",
+          name: "John Doe",
+        },
+        callback: function (data) {
+          if (data.status === "successful") {
+            alert("Payment successful! Redirecting to your download...");
+            window.location.href = downloadUrl;
+          } else {
+            alert("Payment failed or cancelled.");
+          }
+        },
+        customizations: {
+          title: "BookHub Store",
+          description: `Purchase of ${title}`,
+          logo: "https://yourdomain.com/logo.png", // optional
+        },
       });
+    });
   </script>
 </body>
 </html>

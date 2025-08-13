@@ -59,4 +59,5 @@
   { "id": 118, "type": "article", "title": "Journal Article 18", "author": "Author R", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+18", "filename": "article118.pdf", "description": "Abstract: ..." },
   { "id": 119, "type": "article", "title": "Journal Article 19", "author": "Author S", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+19", "filename": "article119.pdf", "description": "Abstract: ..." },
   { "id": 120, "type": "article", "title": "Journal Article 20", "author": "Author T", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+20", "filename": "article120.pdf", "description": "Abstract: ..." }
+  
 ]
