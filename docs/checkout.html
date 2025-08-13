@@ -1,71 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Checkout - BookHub</title>
-  <link rel="stylesheet" href="styles.css"/>
+  <meta charset="UTF-8">
+  <title>Checkout</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
 </head>
 <body>
-  <nav>
-    <h1>📚 BookHub</h1>
-    <a href="index.html">Home</a>
-    <a href="shop.html">Shop</a>
-    <a href="about.html">About</a>
-  </nav>
+  <div id="checkout" style="padding:1rem"></div>
 
-  <main>
-    <h2>Checkout</h2>
-    <div id="order-summary"></div>
-    <button id="pay-now">Pay Now</button>
-  </main>
-
-  <footer>
-    <p>© 2025 BookHub</p>
-  </footer>
-
-  <script src="https://checkout.flutterwave.com/v3.js"></script>
   <script>
-    // Get book details from query string
-    const params = new URLSearchParams(window.location.search);
-    const title = params.get("title");
-    const price = parseFloat(params.get("price"));
-    const downloadUrl = params.get("downloadUrl");
+    // Helper to get query parameters
+    function getQueryParam(name){ 
+      const params = new URLSearchParams(location.search); 
+      return params.get(name); 
+    }
 
-    // Show order summary
-    document.getElementById("order-summary").innerHTML = `
-      <p><strong>Book:</strong> ${title}</p>
-      <p><strong>Price:</strong> ₦${price}</p>
-    `;
+    const id = parseInt(getQueryParam('id')); // Using ?id=101 etc.
 
-    // Payment handler
-    document.getElementById("pay-now").addEventListener("click", function () {
-      FlutterwaveCheckout({
-        public_key: "FLWPUBK_TEST-45fb3374f78bda92f175771f7a9bf51b-X",
-        tx_ref: "bookhub_" + Date.now(),
-        amount: price,
-        currency: "NGN",
-        payment_options: "card, banktransfer, ussd",
-        customer: {
-          email: "customer@example.com",
-          phone_number: "08012345678",
-          name: "John Doe",
-        },
-        callback: function (data) {
-          if (data.status === "successful") {
-            alert("Payment successful! Redirecting to your download...");
-            window.location.href = downloadUrl;
-          } else {
-            alert("Payment failed or cancelled.");
-          }
-        },
-        customizations: {
-          title: "BookHub Store",
-          description: `Purchase of ${title}`,
-          logo: "https://yourdomain.com/logo.png", // optional
-        },
+    fetch('books.json')
+      .then(res => res.json())
+      .then(items => {
+        const p = items.find(x => x.id === id);
+        const el = document.getElementById('checkout');
+
+        if(!p){ 
+          el.innerHTML = '<p>Product not found.</p>'; 
+          return; 
+        }
+
+        el.innerHTML = `
+          <h2>Checkout</h2>
+          <p>${p.title} — ₦${p.price}</p>
+          <p>After payment you'll be able to download the file.</p>
+          <button id="payButton" style="padding:.5rem 1rem; background:#0b5ed7; color:white; border:none; border-radius:6px">Proceed to Pay</button>
+        `;
+
+        document.getElementById('payButton').addEventListener('click', () => {
+          // Flutterwave payment
+          FlutterwaveCheckout({
+            public_key: "FLWPUBK_TEST-45fb3374f78bda92f175771f7a9bf51b-X",
+            tx_ref: "tx-" + Date.now(),
+            amount: Number(p.price),
+            currency: "NGN",
+            payment_options: "card",
+            customer: {
+              email: "customer@example.com",
+              name: "BookHub Store",
+            },
+            callback: function(response) {
+              if(response.status === "successful"){
+                // Redirect to download link after payment
+                window.location.href = p.downloadUrl;
+              } else {
+                alert("Payment was not successful.");
+              }
+            },
+            onclose: function() {}
+          });
+        });
+
+      })
+      .catch(err => {
+        console.error("Error loading books.json:", err);
+        document.getElementById('checkout').innerHTML = '<p>Failed to load product data.</p>';
       });
-    });
   </script>
 </body>
 </html>
