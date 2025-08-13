@@ -1,28 +1,34 @@
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import BookCard from "./components/BookCard"
-import { useDarkMode } from "./hooks/useDarkMode";
+
+// Updated imports to match renamed files
+import Shop from "./pages/Shop";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 
 function App() {
-  const darkMode = useDarkMode(false);
-
-  const books = [
-    { id: 1, title: "Law of Banking and Insurance", price: 25000 },
-    { id: 2, title: "Book Two", price: 3000 },
-  ];
+  const [cart, setCart] = useState([]);
 
   return (
-    <div className={darkMode.value ? "dark" : ""}>
-      <div className="bg-white dark:bg-gray-900 min-h-screen">
-        <Navbar toggleTheme={darkMode.toggle} />
-        <main className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {books.map((book) => (
-            <BookCard key={book.id} title={book.title} price={book.price} />
-          ))}
-        </main>
+    <Router>
+      <div className="flex flex-col min-h-screen">
+        {/* Pass cart count to Navbar so it can show item count */}
+        <Navbar cartCount={cart.length} />
+
+        <div className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Shop cart={cart} setCart={setCart} />} />
+            <Route path="/shop" element={<Shop cart={cart} setCart={setCart} />} />
+            <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
+            <Route path="/checkout" element={<Checkout />} />
+          </Routes>
+        </div>
+
         <Footer />
       </div>
-    </div>
+    </Router>
   );
 }
 

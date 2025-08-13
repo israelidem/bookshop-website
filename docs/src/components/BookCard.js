@@ -1,18 +1,19 @@
-function BookCard({ title, price }) {
-  return (
-    <div className="border rounded-lg p-4 shadow hover:shadow-lg dark:bg-gray-700 dark:text-white">
-      <img
-        src="https://via.placeholder.com/150"
-        alt={title}
-        className="w-full h-40 object-cover rounded"
-      />
-      <h2 className="mt-2 font-bold">{title}</h2>
-      <p className="text-gray-600 dark:text-gray-300">₦{price}</p>
-      <button className="mt-2 px-4 py-2 bg-green-500 text-white rounded">
-        Buy Now
-      </button>
-    </div>
-  );
-}
+// src/components/BookCard.js
+import React from "react";
+
+const BookCard = ({ item }) => (
+  <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden p-4 flex flex-col">
+    <img src={item.thumbnail} alt={item.title} className="h-40 w-full object-cover rounded" />
+    <h3 className="text-lg font-bold mt-2 text-gray-800 dark:text-white">{item.title}</h3>
+    <p className="text-gray-600 dark:text-gray-300">{item.author}</p>
+    <p className="mt-1 font-semibold text-gray-900 dark:text-white">₦{item.price}</p>
+    <a
+      href={`/checkout?id=${item.id}`}
+      className="mt-3 bg-blue-600 hover:bg-blue-700 text-white text-center py-2 rounded"
+    >
+      Buy Now
+    </a>
+  </div>
+);
 
 export default BookCard;
