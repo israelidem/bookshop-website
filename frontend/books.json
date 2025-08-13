@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "type": "book",
+    "title": "Law of Banking and Insurance",
+    "author": "Prof IDEM, Udosen Jacob, PhD, FCArb",
+    "price": 25000,
+    "thumbnail": "https://via.placeholder.com/300x180?text=Book+1",
+    "filename": "book1.pdf",
+    "description": "A comprehensive textbook on contract law."
+  },
+  {
+    "id": 2,
+    "type": "book",
+    "title": "Introduction to Legal Practice",
+    "author": "Prof IDEM, Udosen Jacob, PhD, FCArb",
+    "price": 25000,
+    "thumbnail": "https://via.placeholder.com/300x180?text=Book+2",
+    "filename": "book2.pdf",
+    "description": "In-depth commentary and case studies on labour law."
+  },
+
+  {
+    "id": 101,
+    "type": "article",
+    "title": "Cybercrime Regulatory Agencies need urgent Reform to Protect Nigeria",
+    "author": "Prof IDEM, Udosen Jacob, PhD, FCArb",
+    "price": 2000,
+    "thumbnail": "https://via.placeholder.com/300x180?text=Cybercrime+Reform",
+    "download_url": "https://drive.google.com/uc?export=download&id=1UEUkD3FlNltpClb_iAZGJBydDA47iVgY",
+    "description": "This paper examines the urgent need for reform of Nigeria's cybercrime regulatory agencies."
+  },
+  {
+    "id": 102,
+    "type": "article",
+    "title": "The Prosecution of Cybercrimes in Nigeria: Challenges and Prospects",
+    "author": "Prof IDEM, Udosen Jacob, PhD, FCArb",
+    "price": 2000,
+    "thumbnail": "https://via.placeholder.com/300x180?text=Cybercrime+Prosecution",
+    "download_url": "https://drive.google.com/uc?export=download&id=1aTxRvntw9lMzj_ppELJd8mYijtZ0OJT3",
+    "description": "A detailed analysis of the challenges and prospects in prosecuting cybercrimes in Nigeria."
+  },
+
+  { "id": 103, "type": "article", "title": "Journal Article 3", "author": "Author C", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+3", "filename": "article103.pdf", "description": "Abstract: ..." },
+  { "id": 104, "type": "article", "title": "Journal Article 4", "author": "Author D", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+4", "filename": "article104.pdf", "description": "Abstract: ..." },
+  { "id": 105, "type": "article", "title": "Journal Article 5", "author": "Author E", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+5", "filename": "article105.pdf", "description": "Abstract: ..." },
+  { "id": 106, "type": "article", "title": "Journal Article 6", "author": "Author F", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+6", "filename": "article106.pdf", "description": "Abstract: ..." },
+  { "id": 107, "type": "article", "title": "Journal Article 7", "author": "Author G", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+7", "filename": "article107.pdf", "description": "Abstract: ..." },
+  { "id": 108, "type": "article", "title": "Journal Article 8", "author": "Author H", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+8", "filename": "article108.pdf", "description": "Abstract: ..." },
+  { "id": 109, "type": "article", "title": "Journal Article 9", "author": "Author I", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+9", "filename": "article109.pdf", "description": "Abstract: ..." },
+  { "id": 110, "type": "article", "title": "Journal Article 10", "author": "Author J", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+10", "filename": "article110.pdf", "description": "Abstract: ..." },
+  { "id": 111, "type": "article", "title": "Journal Article 11", "author": "Author K", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+11", "filename": "article111.pdf", "description": "Abstract: ..." },
+  { "id": 112, "type": "article", "title": "Journal Article 12", "author": "Author L", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+12", "filename": "article112.pdf", "description": "Abstract: ..." },
+  { "id": 113, "type": "article", "title": "Journal Article 13", "author": "Author M", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+13", "filename": "article113.pdf", "description": "Abstract: ..." },
+  { "id": 114, "type": "article", "title": "Journal Article 14", "author": "Author N", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+14", "filename": "article114.pdf", "description": "Abstract: ..." },
+  { "id": 115, "type": "article", "title": "Journal Article 15", "author": "Author O", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+15", "filename": "article115.pdf", "description": "Abstract: ..." },
+  { "id": 116, "type": "article", "title": "Journal Article 16", "author": "Author P", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+16", "filename": "article116.pdf", "description": "Abstract: ..." },
+  { "id": 117, "type": "article", "title": "Journal Article 17", "author": "Author Q", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+17", "filename": "article117.pdf", "description": "Abstract: ..." },
+  { "id": 118, "type": "article", "title": "Journal Article 18", "author": "Author R", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+18", "filename": "article118.pdf", "description": "Abstract: ..." },
+  { "id": 119, "type": "article", "title": "Journal Article 19", "author": "Author S", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+19", "filename": "article119.pdf", "description": "Abstract: ..." },
+  { "id": 120, "type": "article", "title": "Journal Article 20", "author": "Author T", "price": 500, "thumbnail": "https://via.placeholder.com/300x180?text=Article+20", "filename": "article120.pdf", "description": "Abstract: ..." }
+]

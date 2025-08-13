@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Checkout</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
+</head>
+<body>
+  <div id="checkout" style="padding:1rem"></div>
+
+  <script>
+    function getQueryParam(name) {
+      const params = new URLSearchParams(location.search);
+      return params.get(name);
+    }
+
+    const id = parseInt(getQueryParam('id'));
+
+    fetch('books.json')
+      .then(r => r.json())
+      .then(items => {
+        const p = items.find(x => x.id === id);
+        const el = document.getElementById('checkout');
+
+        if (!p) {
+          el.innerHTML = '<p>Product not found.</p>';
+          return;
+        }
+
+        el.innerHTML = `
+          <h2>Checkout</h2>
+          <p>${p.title} — ₦${p.price}</p>
+          <p>After payment you'll be able to download the file.</p>
+          <button id="payButton" style="padding:.5rem 1rem;background:#0b5ed7;color:white;border:none;border-radius:6px">
+            Proceed to Pay
+          </button>
+        `;
+
+        document.getElementById('payButton').addEventListener('click', () => {
+          FlutterwaveCheckout({
+            public_key: "FLWPUBK_TEST-45fb3374f78bda92f175771f7a9bf51b-X",
+            tx_ref: "bookhub-" + Date.now(),
+            amount: p.price,
+            currency: "NGN",
+            payment_options: "card, banktransfer, ussd",
+            customer: {
+              email: "customer@example.com",
+              phone_number: "08000000000",
+              name: "John Doe"
+            },
+            customizations: {
+              title: "BookHub",
+              description: `Purchase of ${p.title}`,
+              logo: "https://via.placeholder.com/150"
+            },
+            callback: function(data) {
+              console.log("Payment Response:", data);
+
+              if (data.status === "successful") {
+                // Redirect to your book download link
+                window.location.href = p.download_url; 
+              } else {
+                alert("Payment not completed. Please try again.");
+              }
+            },
+            onclose: function() {
+              alert("Payment window closed.");
+            }
+          });
+        });
+      });
+  </script>
+</body>
+</html>

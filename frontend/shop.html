@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shop - BookHub</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>📚 BookHub</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="shop.html" class="active">Shop</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div>
+      <input id="search" placeholder="Search books or articles..." />
+      <button id="theme-toggle">🌙</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="controls">
+      <button data-filter="all" class="filter-btn active">All</button>
+      <button data-filter="book" class="filter-btn">Books</button>
+      <button data-filter="article" class="filter-btn">Articles</button>
+    </section>
+
+    <section id="products" class="product-grid">
+      <!-- JS will insert product cards here -->
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 BookHub</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

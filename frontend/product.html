@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Product</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="product-container" style="padding:1rem"></div>
+  <script>
+    function getQueryParam(name){ const params=new URLSearchParams(location.search); return params.get(name); }
+    const id = parseInt(getQueryParam('id'));
+    fetch('books.json').then(r=>r.json()).then(items=>{
+      const p = items.find(x=>x.id===id);
+      const el = document.getElementById('product-container');
+      if(!p){ el.innerHTML='<p>Product not found.</p>'; return; }
+      el.innerHTML = `
+        <h1>${p.title}</h1>
+        <p><strong>Author:</strong> ${p.author||''}</p>
+        <p>${p.description||''}</p>
+        <p><strong>Price:</strong> ₦${p.price}</p>
+        <div>
+          <button onclick="window.location.href='checkout.html?id=${p.id}'" style="padding:.5rem 1rem;background:#198754;color:white;border:none;border-radius:6px">Buy Now</button>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>
